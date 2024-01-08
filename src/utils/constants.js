@@ -6,3 +6,5 @@ export const YOUTUBE_SEARCH_API = (query) =>
 
 export const YOUTUBE_SEARCH_LIST_API = (query) =>
   `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${query}&type=video&key=${GOOGLE_API_KEY}`;
+
+export const LIVE_CHAT_COUNT = 10;
