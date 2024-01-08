@@ -3,3 +3,6 @@ export const YOUTUBE_VIDEOS_API = `https://youtube.googleapis.com/youtube/v3/vid
 
 export const YOUTUBE_SEARCH_API = (query) =>
   `http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${query}`;
+
+export const YOUTUBE_SEARCH_LIST_API = (query) =>
+  `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${query}&type=video&key=${GOOGLE_API_KEY}`;
