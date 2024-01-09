@@ -3,9 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
 import { cacheResults } from "../utils/searchSlice";
+import { useNavigate } from "react-router-dom";
+import { clearVideosList } from "../utils/searchResultSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState([]);
@@ -52,6 +55,13 @@ const Header = () => {
       })
     );
   };
+
+  const handleOnClickSearchItem=(searchQuery)=>{
+    // dispatch(clearVideosList())
+    navigate(`/results?search_query=${searchQuery}`)
+    setShowSuggestions(false)
+  }
+
   return (
     <div className="w-[100%] grid grid-flow-col p-2 m-2 shadow-lg">
       <div className="flex h-[100%] items-center col-span-1">
@@ -62,9 +72,10 @@ const Header = () => {
           onClick={() => dispatch(toggleMenu())}
         />
         <img
-          className="h-12"
+          className="h-12 cursor-pointer"
           src="https://t3.ftcdn.net/jpg/03/00/38/90/360_F_300389025_b5hgHpjDprTySl8loTqJRMipySb1rO0I.jpg"
           alt="yt-logo"
+          onClick={()=>navigate('/')}
         />
       </div>
 
@@ -76,7 +87,7 @@ const Header = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
-            onBlur={() => setShowSuggestions(false)}
+            // onBlur={() => setShowSuggestions(false)}
           />
           <button className="border h-[80%] border-gray-400 px-5 py-2 box-border rounded-r-full bg-gray-100">
             <img
@@ -93,6 +104,7 @@ const Header = () => {
                 <li
                   className="flex items-center py-2 shadow-sm hover:bg-gray-100"
                   key={index}
+                  onClick={()=>handleOnClickSearchItem(suggestion)}
                 >
                   <img
                     className="h-3 mr-2"

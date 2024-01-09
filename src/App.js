@@ -7,6 +7,7 @@ import MainContainer from "./components/MainContainer";
 import WatchPage from "./components/WatchPage";
 import Demo from "./components/Demo";
 import Demo2 from "./components/Demo2";
+import SearchResultsPage from "./components/SearchResultsPage";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -31,13 +32,17 @@ function App() {
             </>
           ),
         },
+        {
+          path: "/results",
+          element: <SearchResultsPage />,
+        },
       ],
     },
   ]);
   return (
     <Provider store={appStore}>
       <div className="App">
-        <Header />
+        {/* <Header /> */}
         <RouterProvider router={appRouter} />
       </div>
     </Provider>
