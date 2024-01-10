@@ -25,6 +25,17 @@ export function generateUniqueId() {
   return Date.now(); // You may use a more sophisticated approach for production
 }
 
+export function formatNumberOfViews(value) {
+  if (value >= 1000000) {
+    return (value / 1000000).toFixed(1) + 'M';
+  } else if (value >= 1000) {
+    return (value / 1000).toFixed(1) + 'K';
+  } else {
+    return value.toString();
+  }
+}
+
+
 function isPrime(num) {
   if (num <= 1) return false;
   if (num <= 3) return true;

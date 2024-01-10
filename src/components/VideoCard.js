@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { formatNumberOfViews } from "../utils/helper";
 
 const VideoCard = ({ videoDetails }) => {
   const { snippet, statistics } = videoDetails;
@@ -20,17 +21,17 @@ const VideoCard = ({ videoDetails }) => {
         <h1 className="font-bold">{title}</h1>
         <h2>{channelTitle}</h2>
         <div>
-          <h2>{statistics?.viewCount} views</h2>
+          <h2>{formatNumberOfViews(statistics?.viewCount)} views</h2>
         </div>
       </div>
     </div>
   );
 };
 
-export const AdVideoCard = ({videoDetails}) => {
+export const AdVideoCard = ({ videoDetails }) => {
   return (
     <div className="border border-red-800 p-1 m-1">
-      <VideoCard videoDetails={videoDetails}/>
+      <VideoCard videoDetails={videoDetails} />
     </div>
   );
 };
