@@ -1,21 +1,18 @@
-import React, { useEffect } from 'react'
-import Sidebar from './Sidebar'
-import MainContainer from './MainContainer'
-import { Outlet } from 'react-router-dom'
-import Header from './Header'
-
+import React from "react";
+import Sidebar from "./Sidebar";
+import { Outlet } from "react-router-dom";
+import Header from "./Header";
 
 const Body = () => {
   return (
     <div>
       <Header />
-      <div className='flex'>
+      <div className="flex">
         <Sidebar />
         <Outlet />
+      </div>
     </div>
-    </div>
-    
-  )
-}
+  );
+};
 
-export default Body
+export default Body;

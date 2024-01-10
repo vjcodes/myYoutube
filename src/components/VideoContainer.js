@@ -1,22 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { YOUTUBE_VIDEOS_API } from "../utils/constants";
+import { youtubeVideosApi } from "../utils/constants";
 import VideoCard, { AdVideoCard } from "./VideoCard";
 
 const VideoContainer = () => {
   const [videos, setVideos] = useState([]);
+  const [nextPageToken, setNextPageToken] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getVideos();
   }, []);
 
   const getVideos = async () => {
-    const data = await fetch(YOUTUBE_VIDEOS_API);
+    console.log(nextPageToken);
+    setIsLoading(true);
+    const data = await fetch(youtubeVideosApi(nextPageToken));
     const jsonData = await data.json();
-    setVideos(jsonData?.items);
+    console.log(jsonData);
+    setVideos((prev) => [...prev, ...jsonData?.items]);
+    console.log(jsonData.nextPageToken);
+    setNextPageToken(jsonData.nextPageToken);
+    setIsLoading(false);
   };
+
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop + 1 >=
+      document.documentElement.scrollHeight
+    ) {
+      getVideos();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isLoading]);
+  
   return (
-    <div className="flex flex-wrap justify-start">
-      {videos[0] && <AdVideoCard videoDetails={videos[0]} />}
+    <div className="flex flex-wrap justify-start h-[44rem] overflow-y-scroll">
+      {/* {videos[0] && <AdVideoCard videoDetails={videos[0]} />} */}
       {videos?.map((video) => (
         <VideoCard key={video?.id} videoDetails={video} />
       ))}

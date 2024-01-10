@@ -15,22 +15,23 @@ const SearchResultsPage = () => {
   const nextPageToken = useSelector(
     (store) => store.searchResult.nextPageToken
   );
+  console.log(nextPageToken);
 
   useEffect(() => {
     dispatch(clearVideosList());
     fetchSearchResults();
   }, [searchQuery]);
 
-  //   const handleScroll = () => {
-  //     if (
-  //       window.innerHeight + document.documentElement.scrollTop !==
-  //         document.documentElement.offsetHeight ||
-  //       isLoading
-  //     ) {
-  //       return;
-  //     }
-  //     fetchSearchResults();
-  //   };
+  // const handleScroll = () => {
+  //   if (
+  //     window.innerHeight + document.documentElement.scrollTop !==
+  //       document.documentElement.offsetHeight ||
+  //     isLoading
+  //   ) {
+  //     return;
+  //   }
+  //   fetchSearchResults();
+  // };
 
   const handleScroll = () => {
     if (
@@ -44,7 +45,7 @@ const SearchResultsPage = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isLoading]);
 
   const fetchSearchResults = async () => {
     setIsLoading(true);
@@ -52,6 +53,7 @@ const SearchResultsPage = () => {
       YOUTUBE_SEARCH_LIST_API(searchQuery, nextPageToken)
     );
     const jsonData = await data.json();
+    console.log(jsonData);
     dispatch(addVideos(jsonData));
     setIsLoading(false);
   };
