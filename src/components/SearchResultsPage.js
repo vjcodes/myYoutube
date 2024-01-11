@@ -15,7 +15,6 @@ const SearchResultsPage = () => {
   const nextPageToken = useSelector(
     (store) => store.searchResult.nextPageToken
   );
-  console.log(nextPageToken);
 
   useEffect(() => {
     dispatch(clearVideosList());
@@ -53,7 +52,6 @@ const SearchResultsPage = () => {
       YOUTUBE_SEARCH_LIST_API(searchQuery, nextPageToken)
     );
     const jsonData = await data.json();
-    console.log(jsonData);
     dispatch(addVideos(jsonData));
     setIsLoading(false);
   };

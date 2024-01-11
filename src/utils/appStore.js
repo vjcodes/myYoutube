@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import appSlice from "./appSlice";
-import cacheSlice from './searchSlice'
+import cacheSlice from "./searchSlice";
 import chatSlice from "./chatSlice";
 import searchResultSlice from "./searchResultSlice";
 import userSlice from "./userSlice";
+import userPlaylistsSlice from "./userPlaylistsSlice";
 
 const appStore = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ const appStore = configureStore({
     cache: cacheSlice,
     chat: chatSlice,
     searchResult: searchResultSlice,
-    user: userSlice
+    user: userSlice,
+    userPlaylists: userPlaylistsSlice,
   },
 });
 
