@@ -9,4 +9,7 @@ export const YOUTUBE_SEARCH_LIST_API = (query, nextPageToken) => {
   return `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&pageToken=${nextPageToken}&q=${query}&type=video&key=${GOOGLE_API_KEY}`;
 };
 
+export const youtubeVideoDetailsApi = (videoId) =>
+  `https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id=${videoId}&key=${GOOGLE_API_KEY}`;
+
 export const LIVE_CHAT_COUNT = 10;

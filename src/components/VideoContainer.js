@@ -12,13 +12,10 @@ const VideoContainer = () => {
   }, []);
 
   const getVideos = async () => {
-    console.log(nextPageToken);
     setIsLoading(true);
     const data = await fetch(youtubeVideosApi(nextPageToken));
     const jsonData = await data.json();
-    console.log(jsonData);
     setVideos((prev) => [...prev, ...jsonData?.items]);
-    console.log(jsonData.nextPageToken);
     setNextPageToken(jsonData.nextPageToken);
     setIsLoading(false);
   };
